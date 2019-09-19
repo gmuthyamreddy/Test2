@@ -1,0 +1,16 @@
+Task 1 : Modify a Dummy Read-Only File
+
+sudo touch /zzz
+sudo chmod 644 /zzz
+sudo gedit /zzz
+cat /zzz
+ls -l /zzz
+echo 9999 > /zzz
+
+
+Task 2 :
+
+sudo adduser charlie
+cat /etc/passwd | grep charlie
+gcc cow_root.c -lpthread
+a.out
