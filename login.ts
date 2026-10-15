@@ -3,8 +3,11 @@ interface LoginCredentials {
   password: string;
 }
 
+declare const accessTokenBrand: unique symbol;
+type AccessToken = string & { readonly [accessTokenBrand]: true };
+
 interface LoginResponse {
-  accessToken: string;
+  accessToken: AccessToken;
 }
 
 export async function login(
@@ -29,10 +32,11 @@ export async function login(
     typeof result !== "object" ||
     result === null ||
     !("accessToken" in result) ||
-    typeof result.accessToken !== "string"
+    typeof result.accessToken !== "string" ||
+    result.accessToken.length === 0
   ) {
     throw new Error("The login server returned an invalid response.");
   }
 
-  return { accessToken: result.accessToken };
+  return { accessToken: result.accessToken as AccessToken };
 }
